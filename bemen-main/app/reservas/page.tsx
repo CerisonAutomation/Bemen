@@ -1,23 +1,23 @@
 "use client"
 
-import type React from "react"
-import { useState, useEffect } from "react"
-import {
-  Calendar,
-  Clock,
-  Check,
-  ArrowRight,
-  ArrowLeft,
-  Euro,
-  MapPin,
-  User,
-  Mail,
-  Phone,
-  MessageSquare,
-  AlertCircle,
-  CheckCircle,
-} from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
+import {
+  AlertCircle,
+  ArrowLeft,
+  ArrowRight,
+  Calendar,
+  Check,
+  CheckCircle,
+  Clock,
+  Euro,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Phone,
+  User,
+} from "lucide-react"
+import type React from "react"
+import { useEffect, useState } from "react"
 
 const services = [
   {

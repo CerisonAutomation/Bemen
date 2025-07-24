@@ -1,8 +1,8 @@
 "use client"
 
-import { MapPin, Phone, Clock, Mail, Instagram, Facebook, Star } from "lucide-react"
-import Link from "next/link"
+import { Clock, Facebook, Instagram, Mail, MapPin, Phone, Star } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function Footer() {
   const handleWhatsAppClick = () => {
@@ -37,8 +37,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-pearl mb-6 text-sm leading-relaxed">
-              Excelencia en bienestar masculino. Servicios premium de barbería, masajes terapéuticos y estética avanzada
-              en el corazón de Madrid.
+              Gestión de reservas y contacto para clientes y administradores.
             </p>
             <div className="flex items-center gap-1 mb-4">
               {[...Array(5)].map((_, i) => (
@@ -46,38 +45,6 @@ export default function Footer() {
               ))}
               <span className="text-pearl text-sm ml-2">4.9/5 - 1000+ reseñas</span>
             </div>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="font-serif text-xl font-bold text-gold mb-6">Servicios Premium</h4>
-            <ul className="space-y-3">
-              <li>
-                <Link href="/servicios" className="text-pearl hover:text-gold transition-colors text-sm">
-                  Barbería Artesanal
-                </Link>
-              </li>
-              <li>
-                <Link href="/servicios" className="text-pearl hover:text-gold transition-colors text-sm">
-                  Masajes Terapéuticos
-                </Link>
-              </li>
-              <li>
-                <Link href="/servicios" className="text-pearl hover:text-gold transition-colors text-sm">
-                  Depilación Premium
-                </Link>
-              </li>
-              <li>
-                <Link href="/servicios" className="text-pearl hover:text-gold transition-colors text-sm">
-                  Manicura Ejecutiva
-                </Link>
-              </li>
-              <li>
-                <Link href="/servicios" className="text-pearl hover:text-gold transition-colors text-sm">
-                  Tratamientos Estéticos
-                </Link>
-              </li>
-            </ul>
           </div>
 
           {/* Contact Info */}

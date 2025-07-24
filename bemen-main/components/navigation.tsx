@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { Menu, Phone, X } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X, Phone } from "lucide-react"
-import Image from "next/image"
+import { useEffect, useState } from "react"
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -57,9 +57,8 @@ export default function Navigation() {
 
   const navItems = [
     { href: "/", label: "INICIO", ariaLabel: "Ir a la página de inicio" },
-    { href: "/servicios", label: "SERVICIOS", ariaLabel: "Ver nuestros servicios" },
     { href: "/reservas", label: "RESERVAS", ariaLabel: "Reservar una cita" },
-    { href: "/contacto", label: "CONTACTO", ariaLabel: "Información de contacto" },
+    { href: "/contacto", label: "GESTIÓN", ariaLabel: "Gestión de reservas, login y administración" },
   ]
 
   const handleCall = () => {
