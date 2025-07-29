@@ -1,19 +1,13 @@
 "use client"
 
-import { Clock, Facebook, Instagram, Mail, MapPin, Phone, Star } from "lucide-react"
+import { Clock, Facebook, Instagram, Mail, MapPin, Star } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { BRAND } from "@/utils/globalDesign"
 
 export default function Footer() {
-  const handleWhatsAppClick = () => {
-    const message = encodeURIComponent(
-      "¡Hola! Me gustaría obtener más información sobre los servicios de BEMEN Madrid.",
-    )
-    window.open(`https://wa.me/34604308870?text=${message}`, "_blank")
-  }
-
   return (
-    <footer className="bg-gradient-to-br from-deep-black to-charcoal text-pure-white relative overflow-hidden">
+    <footer className="bg-pure-white text-deep-black">
       {/* Background elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-20 w-64 h-64 border border-gold rounded-full floating-element gpu-accelerated" />
@@ -22,28 +16,25 @@ export default function Footer() {
           style={{ animationDelay: "3s" }}
         />
       </div>
-
       <div className="max-w-7xl mx-auto px-6 py-16 relative z-10">
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-12">
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-4 mb-6">
-              <div className="relative w-16 h-16">
-                <Image src="/images/logo.png" alt="BEMEN Madrid Logo" fill className="object-contain" />
+              <div className="relative w-16 h-16 logo-black">
+                <Image src="/images/logo.png" alt="BEMEN Logo" width={48} height={48} className="logo-black" />
               </div>
               <div>
-                <h3 className="font-serif text-2xl font-bold text-gold">BEMEN</h3>
-                <p className="text-pearl text-sm">MADRID</p>
+                <h3 className="font-serif text-2xl font-bold gradient-text text-deep-black">BEMEN</h3>
+                <p className="text-deep-black text-sm">MADRID</p>
               </div>
             </div>
-            <p className="text-pearl mb-6 text-sm leading-relaxed">
-              Gestión de reservas y contacto para clientes y administradores.
-            </p>
+            <p className="text-deep-black mb-6 text-sm leading-relaxed">{BRAND.description}</p>
             <div className="flex items-center gap-1 mb-4">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} size={16} className="text-gold fill-current" />
               ))}
-              <span className="text-pearl text-sm ml-2">4.9/5 - 1000+ reseñas</span>
+              <span className="text-deep-black text-sm ml-2">4.9/5 - 1000+ reseñas</span>
             </div>
           </div>
 
@@ -59,18 +50,14 @@ export default function Footer() {
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <Phone className="text-gold" size={16} />
-                <Link href="tel:+34604308870" className="text-pearl hover:text-gold transition-colors text-sm">
-                  604 30 88 70
-                </Link>
-              </div>
-              <div className="flex items-center gap-3">
                 <Mail className="text-gold" size={16} />
                 <Link
-                  href="mailto:info@bemenmadrid.com"
-                  className="text-pearl hover:text-gold transition-colors text-sm"
+                  href="https://wa.me/34604308870"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-pearl hover:text-gold transition-colors text-sm font-bold bg-green-600 px-3 py-1 rounded-lg ml-2"
                 >
-                  info@bemenmadrid.com
+                  Contacto por WhatsApp
                 </Link>
               </div>
             </div>
@@ -124,9 +111,6 @@ export default function Footer() {
               <Link href="/reservas" className="professional-btn">
                 RESERVAR CITA
               </Link>
-              <button onClick={handleWhatsAppClick} className="professional-btn bg-green-600 hover:bg-green-700">
-                WHATSAPP
-              </button>
             </div>
             <div className="text-center md:text-right">
               <p className="text-pearl text-sm">© 2024 BEMEN Madrid. Todos los derechos reservados.</p>

@@ -56,9 +56,7 @@ export default function Hero() {
             <div className="relative w-40 h-40 mx-auto mb-8 animate-scale-in">
               <Image src="/images/logo.png" alt="BEMEN Madrid Logo" fill className="object-contain" priority />
             </div>
-            <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl font-bold mb-6 gradient-text leading-tight">
-              BEMEN MADRID
-            </h1>
+            <h1 className="gradient-text">{/* ...existing code... */}</h1>
             <div
               className="flex items-center justify-center gap-3 text-charcoal mb-8 animate-fade-in"
               style={{ animationDelay: "0.3s" }}
@@ -76,7 +74,7 @@ export default function Hero() {
             "Excelencia suprema en bienestar masculino"
           </p>
           <p
-            className="font-sans text-xl mb-16 text-deep-black/80 max-w-4xl mx-auto leading-relaxed animate-fade-in"
+            className="text-deep-black font-sans text-xl mb-16 max-w-4xl mx-auto leading-relaxed animate-fade-in"
             style={{ animationDelay: "0.9s" }}
           >
             Servicios de lujo exclusivos: barbería artesanal, masajes terapéuticos premium, estética avanzada y cuidado
@@ -170,7 +168,7 @@ export default function Hero() {
               <Phone size={20} />
               <span className="font-sans font-semibold text-lg">604 30 88 70</span>
             </div>
-            <p className="text-charcoal text-sm mt-2">Atención personalizada y citas exclusivas</p>
+            <p className="text-deep-black text-sm mt-2">Atención personalizada y citas exclusivas</p>
           </div>
         </div>
       </div>

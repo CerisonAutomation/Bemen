@@ -4,13 +4,14 @@
 
 :root {
   --pure-white: #ffffff;
-  --pearl: #f8f9fa;
   --platinum: #e9ecef;
-  --charcoal: #495057;
   --deep-black: #212529;
   --gold: #d4af37;
   --gold-light: #f4e4a6;
   --gold-dark: #b8941f;
+  --goldivory: #f8f6f0;
+  --charcoal: #495057;
+  --pearl: #f8f9fa;
 
   --font-playfair: "Playfair Display", serif;
   --font-inter: "Inter", sans-serif;
@@ -27,13 +28,9 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  font-family: var(--font-inter), sans-serif;
-  background-color: var(--pure-white);
+body, html {
   color: var(--deep-black);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: var(--pure-white);
 }
 
 /* Typography */
@@ -53,41 +50,37 @@ body {
 .text-pure-white {
   color: var(--pure-white);
 }
-.text-pearl {
-  color: var(--pearl);
-}
 .text-platinum {
   color: var(--platinum);
 }
-.text-charcoal {
-  color: var(--charcoal);
+.text-charcoal, .text-muted-foreground, .text-accent-foreground, .text-primary-foreground, .text-sidebar-foreground, .text-sidebar-accent-foreground, .text-sidebar-accent, .text-sidebar-primary, .text-sidebar-primary-foreground {
+  color: var(--deep-black) !important;
 }
-.text-deep-black {
-  color: var(--deep-black);
-}
-.text-gold {
-  color: var(--gold);
+.text-pearl {
+  color: var(--pearl);
 }
 
+/* Background Colors */
 .bg-pure-white {
-  background-color: var(--pure-white);
+  background-color: var(--pure-white) !important;
 }
 .bg-pearl {
   background-color: var(--pearl);
 }
 .bg-platinum {
-  background-color: var(--platinum);
+  background-color: var(--platinum) !important;
 }
 .bg-charcoal {
   background-color: var(--charcoal);
 }
 .bg-deep-black {
-  background-color: var(--deep-black);
+  background-color: var(--deep-black) !important;
 }
 .bg-gold {
-  background-color: var(--gold);
+  background-color: var(--gold) !important;
 }
 
+/* Border Colors */
 .border-pure-white {
   border-color: var(--pure-white);
 }
@@ -109,29 +102,57 @@ body {
 
 /* Gradient Text */
 .gradient-text {
-  background: linear-gradient(135deg, var(--deep-black) 0%, var(--gold) 50%, var(--deep-black) 100%);
+  background: linear-gradient(90deg, #d4af37 0%, #f4e4a6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
 }
 
-/* Professional Button */
-.professional-btn {
-  @apply bg-gold text-deep-black font-semibold py-4 px-8 rounded-lg hover:bg-gold-dark hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl;
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-  border: 2px solid var(--gold);
+/* Gradient Text - Goldivory */
+.goldivory-gradient-text {
+  background: linear-gradient(90deg, #d4af37 0%, #f4e4a6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
-.professional-btn:hover {
-  background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+/* Professional Button - Consistent Blue/Gold */
+@layer components {
+  .professional-btn {
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    background: var(--gold);
+    color: var(--deep-black);
+    border: 2px solid var(--gold);
+    letter-spacing: 0.04em;
+    font-size: 1rem;
+    min-width: 120px;
+    box-shadow: 0 4px 16px 0 rgba(212,175,55,0.18);
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s;
+  }
+  .professional-btn:hover {
+    background: var(--gold-dark);
+    color: var(--pure-white);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 12px 32px 0 rgba(212,175,55,0.22);
+  }
 }
 
 /* Elegant Card */
 .elegant-card {
-  @apply bg-pure-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-platinum relative overflow-hidden;
+  background-color: var(--platinum);
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  border: 2px solid var(--gold);
+  color: var(--deep-black);
+  position: relative;
+  overflow: hidden;
   backdrop-filter: blur(10px);
+  transition: box-shadow 0.5s, border-color 0.5s;
 }
 
 .elegant-card::before {
@@ -141,7 +162,7 @@ body {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -152,7 +173,11 @@ body {
 
 /* Section Title */
 .section-title {
-  @apply font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-deep-black;
+  font-family: var(--font-playfair), serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: var(--gold);
   letter-spacing: -0.02em;
 }
 
@@ -293,4 +318,12 @@ a:focus {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--gold-dark);
+}
+
+.logo-white {
+  filter: brightness(0) invert(1);
+}
+
+.logo-black {
+  filter: brightness(0) saturate(100%) invert(0) grayscale(1);
 }

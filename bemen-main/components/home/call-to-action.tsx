@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
-import { Phone, MessageCircle, Calendar, Star, MapPin, Clock } from "lucide-react"
-import Link from "next/link"
+import { Calendar, Clock, MapPin, Phone, Star } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
+import { useState, useEffect, useRef } from "react"
 
 export default function CallToAction() {
   const [isVisible, setIsVisible] = useState(false)
@@ -26,17 +26,10 @@ export default function CallToAction() {
     return () => observer.disconnect()
   }, [])
 
-  const handleWhatsAppClick = () => {
-    const message = encodeURIComponent(
-      "¡Hola! Me gustaría reservar una cita en BEMEN Madrid. ¿Podrían ayudarme con la disponibilidad?",
-    )
-    window.open(`https://wa.me/34604308870?text=${message}`, "_blank")
-  }
-
   return (
     <section
       ref={scrollRef}
-      className="py-20 px-6 bg-gradient-to-br from-deep-black to-charcoal relative overflow-hidden"
+      className="py-20 px-6 bg-masculine-blue-dark relative overflow-hidden"
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
@@ -68,17 +61,17 @@ export default function CallToAction() {
             <span className="text-pure-white font-semibold text-sm tracking-wider">RESERVA TU EXPERIENCIA PREMIUM</span>
           </div>
 
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-pure-white leading-tight">
+          <h1 className="gradient-text font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
             ¿LISTO PARA UNA EXPERIENCIA
             <span className="block text-gold">EXCEPCIONAL?</span>
-          </h2>
+          </h1>
 
-          <p className="font-sans text-xl text-pearl max-w-3xl mx-auto mb-12 leading-relaxed">
+          <p className="text-deep-black font-sans text-xl max-w-3xl mx-auto mb-12 leading-relaxed">
             Reserva tu cita ahora y descubre por qué somos la referencia en bienestar masculino premium en Madrid
           </p>
 
           {/* Business Hours Highlight */}
-          <div className="bg-pure-white/10 backdrop-blur-sm border border-gold/30 rounded-2xl p-6 mb-12 max-w-md mx-auto">
+          <div className="elegant-card bg-pure-white/10 backdrop-blur-sm border border-gold/30 rounded-2xl p-6 mb-12 max-w-md mx-auto">
             <h3 className="font-serif text-xl font-bold text-pure-white mb-4 flex items-center justify-center gap-2">
               <Clock className="text-gold" size={20} />
               Horarios de Atención
@@ -101,23 +94,16 @@ export default function CallToAction() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-            <button
-              onClick={handleWhatsAppClick}
-              className="bg-gradient-to-r from-green-500 to-green-600 text-pure-white font-semibold py-5 px-12 rounded-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-3"
-            >
-              <MessageCircle size={20} />
-              RESERVAR POR WHATSAPP
-            </button>
             <Link
               href="/reservas"
-              className="bg-gold text-deep-black font-semibold py-5 px-12 rounded-lg hover:bg-gold-light transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-3"
+              className="professional-btn bg-gold text-deep-black font-semibold py-5 px-12 rounded-lg hover:bg-gold-light transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-3"
             >
               <Calendar size={20} />
               RESERVAR ONLINE
             </Link>
             <Link
               href="tel:+34604308870"
-              className="bg-pure-white/10 backdrop-blur-sm border-2 border-pure-white text-pure-white font-semibold py-5 px-12 rounded-lg hover:bg-pure-white hover:text-deep-black transition-all duration-300 hover:scale-105 flex items-center gap-3"
+              className="professional-btn bg-pure-white/10 backdrop-blur-sm border-2 border-pure-white text-pure-white font-semibold py-5 px-12 rounded-lg hover:bg-pure-white hover:text-deep-black transition-all duration-300 hover:scale-105 flex items-center gap-3"
             >
               <Phone size={20} />
               LLAMAR AHORA

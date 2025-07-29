@@ -364,42 +364,6 @@ export default function ReservasPage() {
     }
   }
 
-  const sendWhatsAppConfirmation = (booking: BookingData) => {
-    const selectedService = services.find((s) => s.id === booking.service)
-    const message = `🎉 *RESERVA CONFIRMADA - BEMEN MADRID*
-
-📅 *Detalles de tu cita:*
-• Servicio: ${selectedService?.name}
-• Descripción: ${selectedService?.description}
-• Fecha: ${formatDate(booking.date)}
-• Hora: ${booking.time}
-• Duración: ${selectedService?.duration}
-• Precio: ${selectedService?.price}€
-
-👤 *Datos del cliente:*
-• Nombre: ${booking.name}
-• Email: ${booking.email}
-• Teléfono: ${booking.phone}
-${booking.notes ? `• Notas: ${booking.notes}` : ""}
-
-📍 *Ubicación:*
-Santísima Trinidad 11, Metro Iglesia, Madrid
-
-⏰ *Información importante:*
-• Llega 5 minutos antes de tu cita
-• Si necesitas cancelar, avísanos con 24h de antelación
-• Trae una toalla si vienes por masaje
-• Confirmaremos tu cita en las próximas horas
-
-¡Te esperamos! 💪✨
-
-*BEMEN Madrid - Bienestar Masculino Premium*
-📞 604 30 88 70`
-
-    const whatsappUrl = `https://wa.me/34604308870?text=${encodeURIComponent(message)}`
-    window.open(whatsappUrl, "_blank")
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -418,20 +382,26 @@ Santísima Trinidad 11, Metro Iglesia, Madrid
     setIsSubmitting(true)
 
     try {
-      // Simulate API call delay
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const selectedService = services.find((s) => s.id === bookingData.service)
+      const response = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: bookingData.name,
+          email: bookingData.email,
+          phone: bookingData.phone,
+          date: bookingData.date + ' ' + bookingData.time,
+          service: selectedService?.name || '',
+        }),
+      })
+      if (!response.ok) throw new Error("No se pudo guardar la reserva")
 
-      // Send WhatsApp confirmation
-      sendWhatsAppConfirmation(bookingData)
-
-      // Show success message
       toast({
         title: "¡Reserva confirmada!",
-        description: "Se ha enviado la confirmación por WhatsApp. Te contactaremos pronto.",
+        description: "Tu reserva ha sido registrada correctamente. Te contactaremos pronto.",
         variant: "success",
       })
 
-      // Reset form but keep personal data for future bookings
       setBookingData((prev) => ({
         service: null,
         date: "",
@@ -444,7 +414,6 @@ Santísima Trinidad 11, Metro Iglesia, Madrid
       setCurrentStep(1)
       setErrors({})
     } catch (error) {
-      console.error("Error submitting booking:", error)
       toast({
         title: "Error al enviar",
         description: "Ha ocurrido un error. Por favor, inténtalo de nuevo.",
@@ -482,17 +451,17 @@ Santísima Trinidad 11, Metro Iglesia, Madrid
   }
 
   return (
-    <main className="min-h-screen pt-20 bg-pure-white">
+    <main className="min-h-screen bg-pure-white text-deep-black">
       {/* Hero Section */}
-      <section className="py-20 px-6 bg-gradient-to-br from-pearl to-pure-white">
+      <section className="py-20 px-6 bg-masculine-blue-light">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-pure-white/80 backdrop-blur-sm border border-gold/30 rounded-full px-6 py-3 mb-8">
+          <div className="inline-flex items-center gap-2 bg-masculine-blue/80 backdrop-blur-sm border border-gold/30 rounded-full px-6 py-3 mb-8">
             <Calendar className="text-gold" size={20} />
-            <span className="text-deep-black font-semibold text-sm tracking-wider">SISTEMA DE RESERVAS</span>
+            <span className="text-goldivory font-semibold text-sm tracking-wider">SISTEMA DE RESERVAS</span>
           </div>
 
-          <h1 className="section-title animate-fade-in">RESERVA TU CITA</h1>
-          <p className="font-sans text-xl text-charcoal max-w-2xl mx-auto animate-slide-up mb-6">
+          <h1 className="section-title animate-fade-in gradient-text">RESERVA TU CITA</h1>
+          <p className="font-sans text-xl text-goldivory max-w-2xl mx-auto animate-slide-up mb-6">
             Reserva tu cita en tres simples pasos y recibe confirmación inmediata por WhatsApp
           </p>
           <div className="flex items-center justify-center gap-2 text-gold">
@@ -510,7 +479,7 @@ Santísima Trinidad 11, Metro Iglesia, Madrid
               <div key={step} className="flex items-center">
                 <div
                   className={`w-12 h-12 rounded-full flex items-center justify-center font-semibold transition-all duration-300 ${
-                    currentStep >= step ? "bg-gold text-pure-white shadow-gold-glow" : "bg-platinum text-charcoal"
+                    currentStep >= step ? "bg-gold text-pure-white shadow-gold-glow" : "bg-platinum text-deep-black"
                   }`}
                 >
                   {currentStep > step ? <Check size={20} /> : step}
@@ -526,13 +495,13 @@ Santísima Trinidad 11, Metro Iglesia, Madrid
             ))}
           </div>
           <div className="flex justify-center mt-4 space-x-16">
-            <span className={`font-sans text-sm font-semibold ${currentStep >= 1 ? "text-gold" : "text-charcoal"}`}>
+            <span className={`font-sans text-sm font-semibold ${currentStep >= 1 ? "text-gold" : "text-deep-black"}`}>
               Servicio
             </span>
-            <span className={`font-sans text-sm font-semibold ${currentStep >= 2 ? "text-gold" : "text-charcoal"}`}>
+            <span className={`font-sans text-sm font-semibold ${currentStep >= 2 ? "text-gold" : "text-deep-black"}`}>
               Fecha y Hora
             </span>
-            <span className={`font-sans text-sm font-semibold ${currentStep >= 3 ? "text-gold" : "text-charcoal"}`}>
+            <span className={`font-sans text-sm font-semibold ${currentStep >= 3 ? "text-gold" : "text-deep-black"}`}>
               Datos Personales
             </span>
           </div>
@@ -814,13 +783,15 @@ Santísima Trinidad 11, Metro Iglesia, Madrid
               <button
                 onClick={prevStep}
                 disabled={currentStep === 1}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                  currentStep === 1
+                className={`flex items-center gap-2 px-5 py-2 rounded-full font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 text-base shadow-elegant
+                  ${currentStep === 1
                     ? "bg-platinum text-charcoal cursor-not-allowed"
-                    : "bg-charcoal text-pure-white hover:bg-deep-black hover:scale-105 focus:ring-charcoal"
-                }`}
+                    : "bg-gold text-pure-white hover:bg-gold/80"}
+                `}
+                style={{ minWidth: 120 }}
+                aria-label="Anterior"
               >
-                <ArrowLeft size={20} />
+                <ArrowLeft size={18} />
                 Anterior
               </button>
 
@@ -828,34 +799,38 @@ Santísima Trinidad 11, Metro Iglesia, Madrid
                 <button
                   onClick={nextStep}
                   disabled={!canProceed(currentStep)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                    !canProceed(currentStep)
+                  className={`flex items-center gap-2 px-5 py-2 rounded-full font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 text-base shadow-elegant
+                    ${!canProceed(currentStep)
                       ? "bg-platinum text-charcoal cursor-not-allowed"
-                      : "professional-btn focus:ring-gold"
-                  }`}
+                      : "bg-gold text-pure-white hover:bg-gold/80"}
+                  `}
+                  style={{ minWidth: 120 }}
+                  aria-label="Siguiente"
                 >
                   Siguiente
-                  <ArrowRight size={20} />
+                  <ArrowRight size={18} />
                 </button>
               ) : (
                 <button
                   onClick={handleSubmit}
                   disabled={!canProceed(currentStep) || isSubmitting}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                    !canProceed(currentStep) || isSubmitting
+                  className={`flex items-center gap-2 px-5 py-2 rounded-full font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 text-base shadow-elegant
+                    ${!canProceed(currentStep) || isSubmitting
                       ? "bg-platinum text-charcoal cursor-not-allowed"
-                      : "bg-green-600 text-pure-white hover:bg-green-700 hover:scale-105 focus:ring-green-600"
-                  }`}
+                      : "bg-gold text-pure-white hover:bg-gold/80"}
+                  `}
+                  style={{ minWidth: 160 }}
+                  aria-label="Confirmar reserva"
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" />
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-gold" />
                       PROCESANDO...
                     </>
                   ) : (
                     <>
                       CONFIRMAR RESERVA
-                      <Check size={20} />
+                      <Check size={18} />
                     </>
                   )}
                 </button>

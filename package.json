@@ -1,0 +1,26 @@
+{
+  "name": "Bemen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "HYDRA_AUTOFIX=true node scripts/autofix.js && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "vercel": "vercel --prod"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.7.0",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.53.0",
+    "eslint-config-next": "^15.4.4"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/recharts": "^2.0.1",
+    "eslint": "^9.32.0"
+  }
+}
